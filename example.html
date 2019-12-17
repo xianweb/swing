@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Swing 水果超市的实现 | Java Swing教程</title>
+    <meta name="description" content="Swing 是一个用于 Java GUI 编程（图形界面设计）的工具包">
+    
+    
+    <link rel="preload" href="/swing/assets/css/0.styles.0257cfbd.css" as="style"><link rel="preload" href="/swing/assets/js/app.4aee09db.js" as="script"><link rel="preload" href="/swing/assets/js/2.c90be59c.js" as="script"><link rel="preload" href="/swing/assets/js/16.03bf99e1.js" as="script"><link rel="prefetch" href="/swing/assets/js/10.d51572b7.js"><link rel="prefetch" href="/swing/assets/js/11.f315dd66.js"><link rel="prefetch" href="/swing/assets/js/12.ec64d7d7.js"><link rel="prefetch" href="/swing/assets/js/13.2c9fa2f2.js"><link rel="prefetch" href="/swing/assets/js/14.371a7295.js"><link rel="prefetch" href="/swing/assets/js/15.73b6cd22.js"><link rel="prefetch" href="/swing/assets/js/17.d03bbd7d.js"><link rel="prefetch" href="/swing/assets/js/3.0b55975c.js"><link rel="prefetch" href="/swing/assets/js/4.cf01d19d.js"><link rel="prefetch" href="/swing/assets/js/5.e31bb61d.js"><link rel="prefetch" href="/swing/assets/js/6.4342a749.js"><link rel="prefetch" href="/swing/assets/js/7.a3c45910.js"><link rel="prefetch" href="/swing/assets/js/8.9257b237.js"><link rel="prefetch" href="/swing/assets/js/9.ee95d4cc.js">
+    <link rel="stylesheet" href="/swing/assets/css/0.styles.0257cfbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/swing/" class="home-link router-link-active"><!----> <span class="site-name">Java Swing教程</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/swing/jframe.html" class="sidebar-link">JFrame 窗口组件</a></li><li><a href="/swing/jpanel.html" class="sidebar-link">JPanel 面板组件</a></li><li><a href="/swing/layout.html" class="sidebar-link">Layout 布局管理器</a></li><li><a href="/swing/jlabel.html" class="sidebar-link">JLabel 标签组件</a></li><li><a href="/swing/jbutton.html" class="sidebar-link">JButton 按钮组件</a></li><li><a href="/swing/jtextfield.html" class="sidebar-link">JTextField 单行文本框组件</a></li><li><a href="/swing/jcombobox.html" class="sidebar-link">JComboBox 下拉列表组件</a></li><li><a href="/swing/listener.html" class="sidebar-link">ActionListener 事件监听</a></li><li><a href="/swing/joptionpane.html" class="sidebar-link">JOptionPane 对话框组件</a></li><li><a href="/swing/jtable.html" class="sidebar-link">JTable 表格组件</a></li><li><a href="/swing/example.html" class="active sidebar-link">Swing 水果超市的实现</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/swing/example.html#项目结构" class="sidebar-link">项目结构</a></li><li class="sidebar-sub-header"><a href="/swing/example.html#新建项目" class="sidebar-link">新建项目</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="swing-水果超市的实现"><a href="#swing-水果超市的实现" class="header-anchor">#</a> Swing 水果超市的实现</h1> <h2 id="项目结构"><a href="#项目结构" class="header-anchor">#</a> 项目结构</h2> <div class="language- extra-class"><pre class="language-text"><code>- images
+   banner.jpg
+   title.jpg
+- lib
+   mysql-connector-java-5.1.38-bin.jar
+- out
+- src
+  - com
+    - seecen
+      - fruit
+        - app
+          - dao
+             Dao.java
+             FruitDao.java
+          - pojo
+             Fruit.java
+          - service
+             FruitService.java
+          - window
+             AbstractEnterFrame.java
+             EnterFrame.java
+             AbstractMainFrame.java
+             MainFrame.java
+          App.java
+        - util
+          Cons.java
+          GUITool.java
+
+</code></pre></div><h2 id="新建项目"><a href="#新建项目" class="header-anchor">#</a> 新建项目</h2> <ol><li><p>新建一个<code>java project</code>项目</p></li> <li><p>新建一个项目包<code>com.seecen.fruit</code></p></li> <li><p>在<code>com.seecen.fruit</code>中新建2个子包<code>app</code>和<code>util</code></p></li> <li><p>在<code>app</code>子包中新建<code>window</code>子包</p></li> <li><p>在<code>util</code>包下新建 <code>Cons.java</code>配置文件和<code>GUITool.java</code>工具文件</p></li> <li><p>在<code>window</code>包下新建<code>AbstractEnterFrame.java</code>抽象入口界面类和<code>EnterFrame.java</code>入口界面实现类</p></li> <li><p><code>AbstractEnterFrame</code>文件负责创建入口界面、添加相关组件、按钮事件</p></li> <li><p><code>AbstractEnterFrame</code>文件将单击进入系统的方法抽象出来，方便覆盖。</p></li> <li><p><code>EnterFrame.java</code> 改写<code>showMainFrame</code>方法</p></li> <li><p>单击进入系统按钮后，打开水果超市主界面</p></li> <li><p>在<code>window</code>子包下创建<code>AbstractMainFrame.java</code>抽象主界面类</p></li> <li><p><code>AbstractMainFrame.java</code>抽象类主要实现 标题组件、表格组件、文本框组件、按钮等添加，将刷新查询事件、按钮添加事件、按钮修改事件、按钮删除事件定义为抽象方法。</p></li> <li><p><code>MainFrame.java</code> 对<code>AbstractMainFrame.java</code>抽象类的方法进行覆盖，分别覆盖 查询事件、添加事件、修改事件、删除事件</p></li></ol> <h3 id="abstractenterframe入口界面抽象类"><a href="#abstractenterframe入口界面抽象类" class="header-anchor">#</a> AbstractEnterFrame入口界面抽象类</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>window</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">BorderLayout</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">Color</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">HeadlessException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionEvent</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionListener</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">ImageIcon</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JButton</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JFrame</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JLabel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JPanel</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">GUITool</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractEnterFrame</span> <span class="token keyword">extends</span> <span class="token class-name">JFrame</span><span class="token punctuation">{</span>
+
+	<span class="token keyword">private</span> <span class="token class-name">JButton</span> btn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JButton</span><span class="token punctuation">(</span><span class="token string">&quot;进入系统&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">AbstractEnterFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">HeadlessException</span> <span class="token punctuation">{</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token class-name">GUITool</span><span class="token punctuation">.</span><span class="token function">createFrame</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">&quot;水果超市欢迎您!&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;mini&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">addComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token class-name">JLabel</span> label <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ImageIcon</span><span class="token punctuation">(</span><span class="token string">&quot;./images/banner.jpg&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span> label<span class="token punctuation">,</span> <span class="token class-name">BorderLayout</span><span class="token punctuation">.</span>NORTH <span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token class-name">JPanel</span> panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		panel<span class="token punctuation">.</span><span class="token function">setBackground</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>white<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		panel<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>btn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">addListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		btn<span class="token punctuation">.</span><span class="token function">addActionListener</span><span class="token punctuation">(</span> <span class="token keyword">new</span> <span class="token class-name">ActionListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+			<span class="token annotation punctuation">@Override</span>
+			<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">actionPerformed</span><span class="token punctuation">(</span><span class="token class-name">ActionEvent</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token function">showMainFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+			
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+	<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">showMainFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+
+<span class="token punctuation">}</span>
+
+
+</code></pre></div><h3 id="enterframe入口界面类"><a href="#enterframe入口界面类" class="header-anchor">#</a> EnterFrame入口界面类</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>window</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">EnterFrame</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractEnterFrame</span> <span class="token punctuation">{</span>
+
+	<span class="token annotation punctuation">@Override</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">showMainFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">new</span> <span class="token class-name">MainFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token keyword">new</span> <span class="token class-name">EnterFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+	
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="abstractmainframe入口界面抽象类"><a href="#abstractmainframe入口界面抽象类" class="header-anchor">#</a> AbstractMainFrame入口界面抽象类</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>window</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>pojo</span><span class="token punctuation">.</span><span class="token class-name">Fruit</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">BorderLayout</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">Dimension</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">Font</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">GridLayout</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">HeadlessException</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionEvent</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionListener</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JButton</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JComboBox</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JFrame</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JLabel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JPanel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JScrollPane</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JTable</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JTextField</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>util</span><span class="token punctuation">.</span><span class="token class-name">GUITool</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">class</span> <span class="token class-name">AbstractMainFrame</span> <span class="token keyword">extends</span> <span class="token class-name">JFrame</span> <span class="token punctuation">{</span>
+
+	<span class="token keyword">private</span> <span class="token class-name">JLabel</span> title <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;水果列表&quot;</span><span class="token punctuation">,</span> <span class="token class-name">JLabel</span><span class="token punctuation">.</span>CENTER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">protected</span> <span class="token class-name">JTable</span> table <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">private</span> <span class="token class-name">JScrollPane</span> scroll <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JScrollPane</span><span class="token punctuation">(</span>table<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">private</span> <span class="token class-name">JLabel</span> numberLabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;水果编号&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">private</span> <span class="token class-name">JLabel</span> nameLabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;水果名称&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">private</span> <span class="token class-name">JLabel</span> priceLabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;水果单价&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">private</span> <span class="token class-name">JLabel</span> unitLabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;计价单位&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">private</span> <span class="token class-name">JLabel</span> actionLabel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;操作&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	    
+    <span class="token keyword">protected</span> <span class="token class-name">JTextField</span> addNumberText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTextField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> <span class="token class-name">JTextField</span> addNameText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTextField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">protected</span> <span class="token class-name">JTextField</span> addPriceText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTextField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    protected JTextField addUnitText = new JTextField();</span>
+    <span class="token keyword">protected</span> <span class="token class-name">JComboBox</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> addUnitText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JComboBox</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">JButton</span> addButton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JButton</span><span class="token punctuation">(</span><span class="token string">&quot;添加水果&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">JTextField</span> updateNumberText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTextField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">JTextField</span> updateNameText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTextField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">JTextField</span> updatePriceText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTextField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    private JTextField updateUnitText = new JTextField();</span>
+    <span class="token keyword">protected</span> <span class="token class-name">JComboBox</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> updateUnitText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JComboBox</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">JButton</span> updateButton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JButton</span><span class="token punctuation">(</span><span class="token string">&quot;修改水果&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">JTextField</span> deleteNumberText <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JTextField</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">JButton</span> deleteButton <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JButton</span><span class="token punctuation">(</span><span class="token string">&quot;删除水果&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">JLabel</span> spaceLabel1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">JLabel</span> spaceLabel2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">JLabel</span> spaceLabel3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JLabel</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">private</span> <span class="token class-name">JPanel</span> footer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token keyword">public</span> <span class="token class-name">AbstractMainFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">HeadlessException</span> <span class="token punctuation">{</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">addBtnListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token class-name">GUITool</span><span class="token punctuation">.</span><span class="token function">createFrame</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> <span class="token string">&quot;超市货物管理&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;default&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">addComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				
+		title<span class="token punctuation">.</span><span class="token function">setPreferredSize</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Dimension</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		title<span class="token punctuation">.</span><span class="token function">setFont</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Font</span><span class="token punctuation">(</span><span class="token class-name">Font</span><span class="token punctuation">.</span>SANS_SERIF<span class="token punctuation">,</span> <span class="token class-name">Font</span><span class="token punctuation">.</span>BOLD<span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		footer<span class="token punctuation">.</span><span class="token function">setLayout</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">GridLayout</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>numberLabel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>nameLabel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>priceLabel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>unitLabel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>actionLabel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>addNumberText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>addNameText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>addPriceText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>addUnitText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>addButton<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>updateNumberText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>updateNameText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>updatePriceText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>updateUnitText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>updateButton<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>deleteNumberText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>spaceLabel1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>spaceLabel2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>spaceLabel3<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		footer<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>deleteButton<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> <span class="token class-name">BorderLayout</span><span class="token punctuation">.</span>NORTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>scroll<span class="token punctuation">,</span> <span class="token class-name">BorderLayout</span><span class="token punctuation">.</span>CENTER<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>footer<span class="token punctuation">,</span> <span class="token class-name">BorderLayout</span><span class="token punctuation">.</span>SOUTH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		
+	<span class="token punctuation">}</span>
+
+    <span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">addBtnListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        addButton<span class="token punctuation">.</span><span class="token function">addActionListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ActionListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">actionPerformed</span><span class="token punctuation">(</span><span class="token class-name">ActionEvent</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">addFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        updateButton<span class="token punctuation">.</span><span class="token function">addActionListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ActionListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">actionPerformed</span><span class="token punctuation">(</span><span class="token class-name">ActionEvent</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">updateFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        deleteButton<span class="token punctuation">.</span><span class="token function">addActionListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ActionListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">actionPerformed</span><span class="token punctuation">(</span><span class="token class-name">ActionEvent</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token function">deleteFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+	
+    <span class="token keyword">private</span> <span class="token class-name">Fruit</span> <span class="token function">getFruit</span><span class="token punctuation">(</span><span class="token class-name">JTextField</span> numberText<span class="token punctuation">,</span> <span class="token class-name">JTextField</span> nameText<span class="token punctuation">,</span> <span class="token class-name">JTextField</span> priceText<span class="token punctuation">,</span> <span class="token class-name">JComboBox</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> unitText<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Fruit</span> fruit <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Fruit</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        fruit<span class="token punctuation">.</span><span class="token function">setNumber</span><span class="token punctuation">(</span><span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>numberText<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        fruit<span class="token punctuation">.</span><span class="token function">setName</span><span class="token punctuation">(</span>nameText<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        fruit<span class="token punctuation">.</span><span class="token function">setPrice</span><span class="token punctuation">(</span><span class="token class-name">Double</span><span class="token punctuation">.</span><span class="token function">parseDouble</span><span class="token punctuation">(</span>priceText<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        fruit<span class="token punctuation">.</span><span class="token function">setUnit</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> unitText<span class="token punctuation">.</span><span class="token function">getSelectedItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> fruit<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">protected</span> <span class="token class-name">Fruit</span> <span class="token function">getAddFruit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">getFruit</span><span class="token punctuation">(</span>addNumberText<span class="token punctuation">,</span> addNameText<span class="token punctuation">,</span> addPriceText<span class="token punctuation">,</span> addUnitText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">protected</span> <span class="token class-name">Fruit</span> <span class="token function">getUpdateFruit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">getFruit</span><span class="token punctuation">(</span>updateNumberText<span class="token punctuation">,</span> updateNameText<span class="token punctuation">,</span> updatePriceText<span class="token punctuation">,</span> updateUnitText<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">protected</span> <span class="token class-name">Integer</span> <span class="token function">getDeleteNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>deleteNumberText<span class="token punctuation">.</span><span class="token function">getText</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">trim</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+	
+	<span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">queryFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">updateFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">deleteFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token keyword">void</span> <span class="token function">addFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="mainframe入口界面类"><a href="#mainframe入口界面类" class="header-anchor">#</a> MainFrame入口界面类</h3> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>window</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JOptionPane</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing<span class="token punctuation">.</span>table</span><span class="token punctuation">.</span><span class="token class-name">DefaultTableModel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>service</span><span class="token punctuation">.</span><span class="token class-name">FruitService</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>seecen<span class="token punctuation">.</span>fruit<span class="token punctuation">.</span>app<span class="token punctuation">.</span>pojo</span><span class="token punctuation">.</span><span class="token class-name">Fruit</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainFrame</span> <span class="token keyword">extends</span> <span class="token class-name">AbstractMainFrame</span> <span class="token punctuation">{</span>
+	
+	<span class="token keyword">private</span> <span class="token class-name">FruitService</span> fruitService <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">FruitService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">public</span> <span class="token class-name">MainFrame</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token function">queryFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+	<span class="token annotation punctuation">@Override</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">queryFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> thead <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token string">&quot;水果编号&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;水果名称&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;水果单价(/元)&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;计价单位&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+		
+		<span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> tbody <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+         <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">5</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            tbody<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;1000&quot;</span> <span class="token operator">+</span> i<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+               tbody<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+		<span class="token punctuation">}</span>
+		table<span class="token punctuation">.</span><span class="token function">setModel</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">DefaultTableModel</span><span class="token punctuation">(</span>tbody<span class="token punctuation">,</span> thead<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token punctuation">}</span>
+
+	<span class="token annotation punctuation">@Override</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">updateFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+	<span class="token punctuation">}</span>
+
+	<span class="token annotation punctuation">@Override</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">deleteFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+	<span class="token punctuation">}</span>
+
+	<span class="token annotation punctuation">@Override</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addFruitItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+	<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/swing/jtable.html" class="prev">JTable 表格组件</a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/swing/assets/js/app.4aee09db.js" defer></script><script src="/swing/assets/js/2.c90be59c.js" defer></script><script src="/swing/assets/js/16.03bf99e1.js" defer></script>
+  </body>
+</html>

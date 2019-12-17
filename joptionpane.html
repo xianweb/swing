@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>JOptionPane 对话框组件 | Java Swing教程</title>
+    <meta name="description" content="Swing 是一个用于 Java GUI 编程（图形界面设计）的工具包">
+    
+    
+    <link rel="preload" href="/swing/assets/css/0.styles.0257cfbd.css" as="style"><link rel="preload" href="/swing/assets/js/app.4aee09db.js" as="script"><link rel="preload" href="/swing/assets/js/2.c90be59c.js" as="script"><link rel="preload" href="/swing/assets/js/10.d51572b7.js" as="script"><link rel="prefetch" href="/swing/assets/js/11.f315dd66.js"><link rel="prefetch" href="/swing/assets/js/12.ec64d7d7.js"><link rel="prefetch" href="/swing/assets/js/13.2c9fa2f2.js"><link rel="prefetch" href="/swing/assets/js/14.371a7295.js"><link rel="prefetch" href="/swing/assets/js/15.73b6cd22.js"><link rel="prefetch" href="/swing/assets/js/16.03bf99e1.js"><link rel="prefetch" href="/swing/assets/js/17.d03bbd7d.js"><link rel="prefetch" href="/swing/assets/js/3.0b55975c.js"><link rel="prefetch" href="/swing/assets/js/4.cf01d19d.js"><link rel="prefetch" href="/swing/assets/js/5.e31bb61d.js"><link rel="prefetch" href="/swing/assets/js/6.4342a749.js"><link rel="prefetch" href="/swing/assets/js/7.a3c45910.js"><link rel="prefetch" href="/swing/assets/js/8.9257b237.js"><link rel="prefetch" href="/swing/assets/js/9.ee95d4cc.js">
+    <link rel="stylesheet" href="/swing/assets/css/0.styles.0257cfbd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/swing/" class="home-link router-link-active"><!----> <span class="site-name">Java Swing教程</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><a href="/swing/jframe.html" class="sidebar-link">JFrame 窗口组件</a></li><li><a href="/swing/jpanel.html" class="sidebar-link">JPanel 面板组件</a></li><li><a href="/swing/layout.html" class="sidebar-link">Layout 布局管理器</a></li><li><a href="/swing/jlabel.html" class="sidebar-link">JLabel 标签组件</a></li><li><a href="/swing/jbutton.html" class="sidebar-link">JButton 按钮组件</a></li><li><a href="/swing/jtextfield.html" class="sidebar-link">JTextField 单行文本框组件</a></li><li><a href="/swing/jcombobox.html" class="sidebar-link">JComboBox 下拉列表组件</a></li><li><a href="/swing/listener.html" class="sidebar-link">ActionListener 事件监听</a></li><li><a href="/swing/joptionpane.html" class="active sidebar-link">JOptionPane 对话框组件</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/swing/joptionpane.html#消息对话框" class="sidebar-link">消息对话框</a></li><li class="sidebar-sub-header"><a href="/swing/joptionpane.html#确认对话框" class="sidebar-link">确认对话框</a></li></ul></li><li><a href="/swing/jtable.html" class="sidebar-link">JTable 表格组件</a></li><li><a href="/swing/example.html" class="sidebar-link">Swing 水果超市的实现</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="joptionpane-对话框组件"><a href="#joptionpane-对话框组件" class="header-anchor">#</a> JOptionPane 对话框组件</h1> <p>对话框通常用作从用户处接收附加信息，或者提供发生了某种事件的通知。</p> <h2 id="消息对话框"><a href="#消息对话框" class="header-anchor">#</a> 消息对话框</h2> <p>消息对话框显示一条提示或警告用户的信息，并等待用户单击 OK 或“确定”按钮以关闭对话框。</p> <h3 id="创建实例"><a href="#创建实例" class="header-anchor">#</a> 创建实例</h3> <h4 id="源代码"><a href="#源代码" class="header-anchor">#</a> 源代码</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> hello<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">Font</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionEvent</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionListener</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JButton</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JComboBox</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JFrame</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JLabel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JOptionPane</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JPanel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JPasswordField</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JTextField</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainApp</span> <span class="token punctuation">{</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+		<span class="token class-name">JFrame</span> frame <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JFrame</span><span class="token punctuation">(</span><span class="token string">&quot;水果超市欢迎您!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		frame<span class="token punctuation">.</span><span class="token function">setBounds</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token class-name">JPanel</span> panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token class-name">JButton</span> btn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JButton</span><span class="token punctuation">(</span><span class="token string">&quot;确定&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		btn<span class="token punctuation">.</span><span class="token function">addActionListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ActionListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+			<span class="token annotation punctuation">@Override</span>
+			<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">actionPerformed</span><span class="token punctuation">(</span><span class="token class-name">ActionEvent</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token class-name">JOptionPane</span><span class="token punctuation">.</span><span class="token function">showMessageDialog</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&quot;提示信息！&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		panel<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>btn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		frame<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		frame<span class="token punctuation">.</span><span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="实际效果"><a href="#实际效果" class="header-anchor">#</a> 实际效果</h4> <p><img src="/swing/assets/img/swing19.c0f0cd9b.png" alt=""></p> <h2 id="确认对话框"><a href="#确认对话框" class="header-anchor">#</a> 确认对话框</h2> <p>确认对话框显示消息，并等待用户单击“确定”按钮来取消对话框，该对话框不返回任何值。</p> <h4 id="源代码-2"><a href="#源代码-2" class="header-anchor">#</a> 源代码</h4> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">package</span> hello<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt</span><span class="token punctuation">.</span><span class="token class-name">Font</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionEvent</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>awt<span class="token punctuation">.</span>event</span><span class="token punctuation">.</span><span class="token class-name">ActionListener</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JButton</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JComboBox</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JFrame</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JLabel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JOptionPane</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JPanel</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JPasswordField</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token namespace">javax<span class="token punctuation">.</span>swing</span><span class="token punctuation">.</span><span class="token class-name">JTextField</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MainApp</span> <span class="token punctuation">{</span>
+
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+		<span class="token class-name">JFrame</span> frame <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JFrame</span><span class="token punctuation">(</span><span class="token string">&quot;水果超市欢迎您!&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		frame<span class="token punctuation">.</span><span class="token function">setBounds</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token class-name">JPanel</span> panel <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JPanel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token class-name">JButton</span> btn <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JButton</span><span class="token punctuation">(</span><span class="token string">&quot;确定&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		btn<span class="token punctuation">.</span><span class="token function">addActionListener</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">ActionListener</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+			<span class="token annotation punctuation">@Override</span>
+			<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">actionPerformed</span><span class="token punctuation">(</span><span class="token class-name">ActionEvent</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+				<span class="token class-name">JOptionPane</span><span class="token punctuation">.</span><span class="token function">showConfirmDialog</span><span class="token punctuation">(</span><span class="token keyword">null</span><span class="token punctuation">,</span> <span class="token string">&quot;确定要删除吗？&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;删除提示&quot;</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token punctuation">}</span>
+
+		<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		panel<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>btn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		frame<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>panel<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		frame<span class="token punctuation">.</span><span class="token function">setVisible</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="实际效果-2"><a href="#实际效果-2" class="header-anchor">#</a> 实际效果</h4> <p><img src="/swing/assets/img/swing20.e96c1924.png" alt=""></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/swing/listener.html" class="prev">ActionListener 事件监听</a></span> <span class="next"><a href="/swing/jtable.html">JTable 表格组件</a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/swing/assets/js/app.4aee09db.js" defer></script><script src="/swing/assets/js/2.c90be59c.js" defer></script><script src="/swing/assets/js/10.d51572b7.js" defer></script>
+  </body>
+</html>
